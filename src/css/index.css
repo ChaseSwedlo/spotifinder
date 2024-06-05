@@ -45,7 +45,7 @@ body {
 .box {
   width: 980px;
   height: 600px;
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   position: absolute;
   top: 0;
   left: 0;
@@ -82,6 +82,13 @@ body {
     position: absolute;
     margin-top: 12px;
     margin-left: 13px;
+    transition-duration: 0.2s;
+    &:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    &:active {
+      color: rgba(255, 255, 255, 0.35);
+    }
     svg {
       height: 21px;
       width: 21px;
@@ -96,6 +103,16 @@ body {
     color: rgba(255, 255, 255, 0.699);
     font-size: 16px;
     font-weight: 500;
+    border: 1.4px solid rgba(255, 255, 255, 0.01);
+    transition-duration: 0.2s;
+    cursor: pointer;
+    &:hover {
+      border: 1.4px solid rgba(255, 255, 255, 0.1);
+    }
+    &:focus {
+      border: 1.4px solid rgba(255, 255, 255, 0.2);
+      cursor: text;
+    }
   }
 }
 
@@ -152,12 +169,28 @@ body {
   width: 100%;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  padding: 5px;
+  padding: 0 5px 5px 5px;
+  gap: 5px;
 }
 
 aside {
-  height: 533px;
-  width: 28%;
-  background-color: grey;
+  height: 538px;
+  width: 26%;
+  background-color: rgb(19, 19, 19);
+  border-radius: 6px;
+}
+
+.center-box {
+  height: 538px;
+  width: 48%;
+  background: linear-gradient(to bottom, rgb(19, 19, 19) 0px, rgb(0, 0, 0) 520px);
+  border-radius: 6px;
+  overflow: scroll;
+}
+
+.right-box {
+  height: 538px;
+  width: 26%;
+  background-color: rgb(19, 19, 19);
   border-radius: 6px;
 }

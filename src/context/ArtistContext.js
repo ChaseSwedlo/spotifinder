@@ -6,6 +6,7 @@ export const ArtistContext = createContext();
 export const ArtistProvider = ({ children }) => {
     const [artist, setArtist] = useState(null);
     const [albums, setAlbums] = useState([]);
+    const [topTracks, setTopTracks] = useState([]);
     const [token, setToken] = useState(null);
 
     const clientId = '465d2502d50b478abc71c3e6f1d6d02a';
@@ -38,6 +39,16 @@ export const ArtistProvider = ({ children }) => {
                     }
                 });
                 setAlbums(albumsResponse.data.items);
+
+                const topTracksResponse = await axios.get(`https://api.spotify.com/v1/artists/${artist.id}/top-tracks`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    params: {
+                        market: 'US'
+                    }
+                });
+                setTopTracks(topTracksResponse.data.tracks);
             }
         } catch (error) {
             console.error('Error fetching artist data', error);
@@ -66,7 +77,7 @@ export const ArtistProvider = ({ children }) => {
     }, []);
 
     return (
-        <ArtistContext.Provider value={{ artist, albums, fetchArtistData }}>
+        <ArtistContext.Provider value={{ artist, albums, topTracks, fetchArtistData }}>
             {children}
         </ArtistContext.Provider>
     );

@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArtistProvider } from './context/ArtistContext.js';
-import ArtistSearch from './components/ArtistSearch';
 import './css/index.css';
 import Spotify from './components/Spotify.js';
 
