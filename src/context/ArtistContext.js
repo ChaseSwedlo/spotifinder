@@ -18,7 +18,7 @@ export const ArtistProvider = ({ children }) => {
                 const newToken = await getSpotifyToken();
                 setToken(newToken);
             }
-            
+
             const artistResponse = await axios.get(`https://api.spotify.com/v1/search`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -68,6 +68,12 @@ export const ArtistProvider = ({ children }) => {
         return response.data.access_token;
     };
 
+    const clearArtistData = () => {
+        setArtist(null);
+        setAlbums([]);
+        setTopTracks([]);
+    };
+
     useEffect(() => {
         const fetchToken = async () => {
             const newToken = await getSpotifyToken();
@@ -77,7 +83,7 @@ export const ArtistProvider = ({ children }) => {
     }, []);
 
     return (
-        <ArtistContext.Provider value={{ artist, albums, topTracks, fetchArtistData }}>
+        <ArtistContext.Provider value={{ artist, albums, topTracks, fetchArtistData, clearArtistData }}>
             {children}
         </ArtistContext.Provider>
     );

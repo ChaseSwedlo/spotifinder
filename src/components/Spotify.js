@@ -8,14 +8,19 @@ import {
   FaEllipsis, 
   FaAngleLeft, 
   FaAngleRight, 
-  FaHouse 
+  FaHouse,
+  FaHeart,
+  FaArrowRightToBracket,
+  FaPlus,
+  FaListUl
 } from "react-icons/fa6";
 
 function Spotify() {
   const boxRef = useRef(null);
   const headerRef = useRef(null);
   const formRef = useRef(null);
-  const { artist, albums, topTracks, fetchArtistData } = useContext(ArtistContext);
+  const inputRef = useRef(null);
+  const { artist, albums, topTracks, fetchArtistData, clearArtistData } = useContext(ArtistContext); // Assuming you have a clearArtistData function in your context
   const [artistName, setArtistName] = useState('');
 
   useEffect(() => {
@@ -85,8 +90,14 @@ function Spotify() {
   const handleSubmit = (event) => {
     event.preventDefault();
     fetchArtistData(artistName);
+    setArtistName('');
+    inputRef.current.blur(); // Unfocus the input field
   };
-console.log(topTracks);
+
+  const handleClearArtist = () => {
+    clearArtistData(); // Call the context function to clear artist data
+  };
+
   return (
     <div ref={boxRef} className="box">
       <header ref={headerRef}>
@@ -98,7 +109,7 @@ console.log(topTracks);
                 <FaAngleLeft/>
                 <FaAngleRight/>
               </li>
-              <li>
+              <li onClick={handleClearArtist}>
                 <FaHouse/>
               </li>
             </ul>
@@ -112,8 +123,11 @@ console.log(topTracks);
             <input 
               type='text' 
               placeholder='Search for an Artist' 
+              name='inputbar'
+              autoComplete='false'
               value={artistName}
               onChange={handleInputChange}
+              ref={inputRef}
             />
           </form>
         </div>
@@ -128,33 +142,92 @@ console.log(topTracks);
         </div>
       </header>
       <section className='main flex'>
-        <aside>
-          
+        <aside className='playlist'>
+          <div className='flex library'>
+            <h2>Your Library</h2>
+            <div className='flex'>
+            <FaPlus/>
+            <FaArrowRightToBracket/>
+            </div>
+          </div>
+          <div className='options center'>
+            <ul className='flex'>
+              <li>Playlist</li>
+              <li>Albums</li>
+              <li>Artist</li>
+            </ul>
+            <div>
+              <FaMagnifyingGlass/>
+              <FaListUl/>
+            </div>
+          </div>
+          {/*
+          <ul className='lists'>
+            <li className='flex'>
+              <div className='playlist-icon'></div>
+              <h3>Liked Songs</h3>
+            </li>
+            <li className='flex'>
+              <div className='playlist-icon'></div>
+              <h3>Liked Songs</h3>
+            </li>
+            <li className='flex'>
+              <div className='playlist-icon'></div>
+              <h3>Liked Songs</h3>
+            </li>
+            <li className='flex'>
+              <div className='playlist-icon'></div>
+              <h3>Liked Songs</h3>
+            </li>
+          </ul>
+          */}
         </aside>
         <div className='center-box'>
           {artist ? (
             <div>
-              <h2>{artist.name}</h2>
-              <p>Followers: {artist.followers.total}</p>
-              <p>Genres: {artist.genres.join(', ')}</p>
-              <img src={artist.images[0]?.url} alt={artist.name} />
-              <h3>Albums:</h3>
-              <ul>
-                {albums.map(album => (
-                  <li key={album.id}>{album.name}</li>
-                ))}
-              </ul>
-              <h3>Top Tracks:</h3>
-              <ul>
-                {topTracks.map(track => (
-                  <li key={track.id}>
-                    {track.name} - {track.album.name}
-                  </li>
-                ))}
-              </ul>
+              <section className='center artist-header'>
+                <figure className='artist-pic'>
+                  <img src={artist.images[0]?.url} alt={artist.name} />
+                </figure>
+                <div className='artist-title center'>
+                  <h2>{artist.name}</h2>
+                </div>
+                <div className='stats flex gap-20'>
+                  <div className='center'>
+                    <p>{artist.followers.total}</p>
+                    <span>followers</span>
+                  </div>
+                  <div className='center'>
+                    <p>{albums.length}</p>
+                    <span>Albums</span>
+                  </div>
+                </div>
+                <div className='popular'>
+                  <h3>Popular</h3>
+                  <ul>
+                    {topTracks.map(track => (
+                      <li key={track.id}>
+                        {track.name} - {track.album.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className='albums'>
+                  <h3>Albums</h3>
+                  <ul>
+                    {albums.map(album => (
+                      <li key={album.id}>
+                        {album.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
             </div>
           ) : (
+            <div className='not-found'>
             <p>No artist selected</p>
+            </div>
           )}
         </div>
         <div className='right-box'>

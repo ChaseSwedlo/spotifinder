@@ -10,6 +10,11 @@
   margin-inline: auto;
 }
 
+.center {
+  display: grid;
+  place-items: center;
+}
+
 body {
   font-family: "Inter", Arial, sans-serif;
   color: rgb(255, 255, 255);
@@ -176,21 +181,189 @@ body {
 aside {
   height: 538px;
   width: 26%;
-  background-color: rgb(19, 19, 19);
+  background-color: rgb(13, 13, 14);
   border-radius: 6px;
 }
 
 .center-box {
   height: 538px;
   width: 48%;
-  background: linear-gradient(to bottom, rgb(19, 19, 19) 0px, rgb(0, 0, 0) 520px);
+  background: linear-gradient(to bottom, rgb(13, 13, 14) 0px, rgb(0, 0, 0) 520px);
   border-radius: 6px;
   overflow: scroll;
+  padding: 15px;
 }
 
 .right-box {
   height: 538px;
   width: 26%;
-  background-color: rgb(19, 19, 19);
+  background-color: rgb(13, 13, 14);
   border-radius: 6px;
+}
+
+.not-found { 
+  display: grid;
+  place-items: center;
+  height: 100%;
+  p {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 550;
+    opacity: 0.5;
+  }
+}
+
+.artist-pic {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.artist-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.artist-header {
+  background-position: top;
+  margin-bottom: 10px;
+}
+
+.artist-title {
+  margin-left: 10px;
+  h2 {
+    font-size: 42px;
+    font-weight: 550;
+  }
+}
+
+.stats {
+  gap: 40px;
+  p {
+    color: #1DB954;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  span {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+}
+
+.popular, .albums {
+  width: 100%;
+  h3 {
+    font-size: 19px;
+    font-weight: 550;
+  }
+  ul {
+    padding: 0 20px;
+  }
+  li {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+}
+
+.library {
+  justify-content: space-between;
+  width: 100%;
+  height: 44px;
+  background-color: rgba(128, 128, 128, 0.0);
+  border-radius: 6px;
+  padding: 0 15px;
+  h2 {
+    line-height: 44px;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.75;
+  }
+  svg {
+    margin-left: 15px;
+    height: 15px;
+    width: 15px;
+    opacity: 0.75;
+    margin-top: 18px;
+  }
+}
+
+.playlist {
+  svg{
+    cursor: pointer;
+  }
+  .playlist-icon {
+    border-radius: 6px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(176, 176, 176, 0.354);
+    display: grid;
+    place-items: center;
+    svg {
+      height: 35px;
+      width: 35px;
+      color: black;
+    }
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 50px;
+    padding-left: 10px;
+  }
+  .lists {
+    width: 100%;
+    li {
+      width: 100%;
+      height: 50px;
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+  }
+}
+
+.options {
+  padding: 5px 0;
+  width: 100%;
+  ul {
+    width: auto;
+    gap: 10px;
+  }
+  ul li {
+    display: flex;
+    font-size: 14px;
+    padding: 5px 12px;
+    background-color: rgba(128, 128, 128, 0.2);
+    font-size: 13px;
+    border-radius: 40px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    user-select: none;
+    cursor: pointer;
+    transition-duration: 0.14s;
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.3);
+    }
+  }
+  div {
+    padding: 15px 15px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    svg {
+      height: 15px;
+      width: 15px;
+      opacity: 0.75;
+    }
+    p{
+      font-size: 13px;
+      font-weight: 500;
+    }
+  }
 }
