@@ -9,7 +9,6 @@ import {
   FaAngleLeft, 
   FaAngleRight, 
   FaHouse,
-  FaHeart,
   FaArrowRightToBracket,
   FaPlus,
   FaListUl
