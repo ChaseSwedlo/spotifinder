@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/spotifinder/static/css/main.c9d09c1d.css",
+    "main.css": "/spotifinder/static/css/main.bdfae0dc.css",
     "main.js": "/spotifinder/static/js/main.92fac83a.js",
     "static/media/bg.jpg": "/spotifinder/static/media/bg.0d88b87bf815f0d050ba.jpg",
     "index.html": "/spotifinder/index.html",
-    "main.c9d09c1d.css.map": "/spotifinder/static/css/main.c9d09c1d.css.map",
+    "main.bdfae0dc.css.map": "/spotifinder/static/css/main.bdfae0dc.css.map",
     "main.92fac83a.js.map": "/spotifinder/static/js/main.92fac83a.js.map"
   },
   "entrypoints": [
-    "static/css/main.c9d09c1d.css",
+    "static/css/main.bdfae0dc.css",
     "static/js/main.92fac83a.js"
   ]
 }
