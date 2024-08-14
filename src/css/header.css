@@ -1,0 +1,130 @@
+.box header {
+  height: 56px;
+  background-color: rgba(20, 20, 20, 0);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  cursor: default;
+  display: flex;
+  &:active {
+    cursor: pointer;
+  }
+}
+
+.top-left, .top-right {
+  width: 200px;
+  height: 60px;
+}
+
+.top-center {
+  width: 580px;
+  height: 56px;
+}
+
+.top-center {
+  display: grid;
+  place-items: center;
+}
+
+.top-center input {
+  width: 450px;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 60px;
+  padding: 0 40px 0 46px;
+  color: rgba(255, 255, 255, 0.699);
+  font-size: 16px;
+  font-weight: 500;
+  border: 1.4px solid rgba(255, 255, 255, 0.01);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.top-center input:focus {
+  border: 1.4px solid rgba(255, 255, 255, 0.2);
+  cursor: text;
+}
+
+.top-center input:hover {
+  border: 1.4px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-center button {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  position: absolute;
+  margin-top: 12px;
+  margin-left: 13px;
+  transition-duration: 0.2s;
+}
+
+.top-center button svg {
+  height: 21px;
+  width: 21px;
+}
+
+.top-center button:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.top-center button:active {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.top-right {
+  display: flex;
+  justify-content: right;
+}
+
+.top-right nav ul li {
+  font-size: 22px;
+  height: 56px;
+  padding: 0 15px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.top-right nav ul li svg {
+  margin-top: 20px;
+  height: 16px;
+  width: 16px;
+  opacity: 0.8;
+}
+
+.top-right nav ul li .square {
+  height: 14px;
+  width: 14px;
+  margin-top: 21px;
+}
+
+.top-right nav ul li:hover {
+  background-color: rgba(128, 128, 128, 0.169);
+}
+
+.top-right nav ul li:last-child {
+  border-top-right-radius: 8px;
+}
+
+.top-left nav ul li {
+  height: 56px;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.top-left nav ul li svg {
+  margin-top: 20px;
+  height: 16px;
+  width: 16px;
+  opacity: 0.8;
+}
+
+.top-left nav ul li:hover {
+  background-color: rgba(128, 128, 128, 0.169);
+}
+
+.top-left nav ul li:active {
+  background-color: rgba(128, 128, 128, 0.14);
+}
+
+.top-left nav ul li:first-child {
+  border-top-left-radius: 8px;
+}

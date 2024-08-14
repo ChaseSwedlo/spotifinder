@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import { ArtistContext } from '../context/ArtistContext';
 import Library from './Library';
+import '../css/header.css';
 import { motion } from 'framer-motion';
 import { 
   FaXmark, 
