@@ -3,6 +3,8 @@ import { ArtistContext } from '../context/ArtistContext';
 import Library from './Library';
 import '../css/header.css';
 import { motion } from 'framer-motion';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { 
   FaXmark, 
   FaRegSquare, 
@@ -21,11 +23,13 @@ function Spotify() {
   const inputRef = useRef(null);
   const { artist, albums, topTracks, fetchArtistData, clearArtistData, history, removeArtistFromHistory } = useContext(ArtistContext);
   
+  const [artistName, setArtistName] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const handleHistoryItemDelete = (event, artistName) => {
     event.stopPropagation();
     removeArtistFromHistory(artistName);
   };
-  const [artistName, setArtistName] = useState('');
 
   useEffect(() => {
     const box = boxRef.current;
@@ -93,7 +97,8 @@ function Spotify() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchArtistData(artistName);
+    setLoading(true);
+    fetchArtistData(artistName).finally(() => setLoading(false));
     setArtistName('');
     inputRef.current.blur();
   };
@@ -152,7 +157,9 @@ function Spotify() {
       <section className='main flex'>
         <Library/>
         <div className='center-box'>
-          {artist ? (
+          {loading && !artist ? (
+            <Skeleton className="skeleton-transparent" count={1} height={508} />
+          ) : artist ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -208,18 +215,19 @@ function Spotify() {
           <h2>Search History</h2>
           <ul>
             {history.map((item, index) => (
-            <li key={index} className="history-item" onClick={() => handleHistoryItemClick(item.name, item.image)}>
-              <div className="history-image-container">
-                <img src={item.image} alt={item.name} className="history-image" />
-              </div>
-              <span>{item.name}</span>
-              <FaXmark className='del-artist' onClick={(e) => handleHistoryItemDelete(e, item.name)} />
-            </li>
-          ))}
+              <li key={index} className="history-item" onClick={() => handleHistoryItemClick(item.name, item.image)}>
+                <div className="history-image-container">
+                  <img src={item.image} alt={item.name} className="history-image" />
+                </div>
+                <span>{item.name}</span>
+                <FaXmark className='del-artist' onClick={(e) => handleHistoryItemDelete(e, item.name)} />
+              </li>
+            ))}
           </ul>
         </div>
       </section>
     </div>
   );
 }
+
 export default Spotify;
