@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import { ArtistContext } from '../context/ArtistContext';
+import Library from './Library';
+import { motion } from 'framer-motion';
 import { 
   FaXmark, 
   FaRegSquare, 
@@ -8,10 +10,7 @@ import {
   FaEllipsis, 
   FaAngleLeft, 
   FaAngleRight, 
-  FaHouse,
-  FaArrowRightToBracket,
-  FaPlus,
-  FaListUl
+  FaHouse
 } from "react-icons/fa6";
 
 function Spotify() {
@@ -19,7 +18,12 @@ function Spotify() {
   const headerRef = useRef(null);
   const formRef = useRef(null);
   const inputRef = useRef(null);
-  const { artist, albums, topTracks, fetchArtistData, clearArtistData } = useContext(ArtistContext); // Assuming you have a clearArtistData function in your context
+  const { artist, albums, topTracks, fetchArtistData, clearArtistData, history, removeArtistFromHistory } = useContext(ArtistContext);
+  
+  const handleHistoryItemDelete = (event, artistName) => {
+    event.stopPropagation();
+    removeArtistFromHistory(artistName);
+  };
   const [artistName, setArtistName] = useState('');
 
   useEffect(() => {
@@ -90,11 +94,15 @@ function Spotify() {
     event.preventDefault();
     fetchArtistData(artistName);
     setArtistName('');
-    inputRef.current.blur(); // Unfocus the input field
+    inputRef.current.blur();
   };
 
   const handleClearArtist = () => {
-    clearArtistData(); // Call the context function to clear artist data
+    clearArtistData();
+  };
+
+  const handleHistoryItemClick = (artistName, artistImage) => {
+    fetchArtistData(artistName, false);
   };
 
   return (
@@ -141,49 +149,15 @@ function Spotify() {
         </div>
       </header>
       <section className='main flex'>
-        <aside className='playlist'>
-          <div className='flex library'>
-            <h2>Your Library</h2>
-            <div className='flex'>
-            <FaPlus/>
-            <FaArrowRightToBracket/>
-            </div>
-          </div>
-          <div className='options center'>
-            <ul className='flex'>
-              <li>Playlist</li>
-              <li>Albums</li>
-              <li>Artist</li>
-            </ul>
-            <div>
-              <FaMagnifyingGlass/>
-              <FaListUl/>
-            </div>
-          </div>
-          {/*
-          <ul className='lists'>
-            <li className='flex'>
-              <div className='playlist-icon'></div>
-              <h3>Liked Songs</h3>
-            </li>
-            <li className='flex'>
-              <div className='playlist-icon'></div>
-              <h3>Liked Songs</h3>
-            </li>
-            <li className='flex'>
-              <div className='playlist-icon'></div>
-              <h3>Liked Songs</h3>
-            </li>
-            <li className='flex'>
-              <div className='playlist-icon'></div>
-              <h3>Liked Songs</h3>
-            </li>
-          </ul>
-          */}
-        </aside>
+        <Library/>
         <div className='center-box'>
           {artist ? (
-            <div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.8 }}
+            >
               <section className='center artist-header'>
                 <figure className='artist-pic'>
                   <img src={artist.images[0]?.url} alt={artist.name} />
@@ -222,19 +196,29 @@ function Spotify() {
                   </ul>
                 </div>
               </section>
-            </div>
+            </motion.div>
           ) : (
-            <div className='not-found'>
-            <p>No artist selected</p>
-            </div>
+            <motion.div className='not-found'>
+              <p>No artist selected</p>
+            </motion.div>
           )}
         </div>
         <div className='right-box'>
-          
+          <h2>Search History</h2>
+          <ul>
+            {history.map((item, index) => (
+            <li key={index} className="history-item" onClick={() => handleHistoryItemClick(item.name, item.image)}>
+              <div className="history-image-container">
+                <img src={item.image} alt={item.name} className="history-image" />
+              </div>
+              <span>{item.name}</span>
+              <FaXmark className='del-artist' onClick={(e) => handleHistoryItemDelete(e, item.name)} />
+            </li>
+          ))}
+          </ul>
         </div>
       </section>
     </div>
   );
 }
-
 export default Spotify;

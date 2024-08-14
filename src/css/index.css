@@ -63,8 +63,11 @@ body {
   background-color: rgba(20, 20, 20, 0);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  cursor: grab;
+  cursor: default;
   display: flex;
+  &:active {
+    cursor: pointer;
+  }
 }
 
 .top-left, .top-right {
@@ -164,6 +167,9 @@ body {
   &:hover {
     background-color: rgba(128, 128, 128, 0.169);
   }
+  &:active {
+    background-color: rgba(128, 128, 128, 0.14);
+  }
   &:first-child {
     border-top-left-radius: 8px;
   }
@@ -210,6 +216,7 @@ aside {
     text-transform: uppercase;
     font-weight: 550;
     opacity: 0.5;
+    user-select: none;
   }
 }
 
@@ -284,6 +291,7 @@ aside {
     font-size: 16px;
     font-weight: 500;
     opacity: 0.75;
+    user-select: none;
   }
   svg {
     margin-left: 15px;
@@ -291,6 +299,13 @@ aside {
     width: 15px;
     opacity: 0.75;
     margin-top: 18px;
+    transition-duration: 0.2s;
+    &:hover {
+      opacity: 0.63;
+    }
+    &:active {
+      opacity: 0.53;
+    }
   }
 }
 
@@ -350,6 +365,9 @@ aside {
     &:hover {
       background-color: rgba(128, 128, 128, 0.3);
     }
+    &:active {
+      background-color: rgba(128, 128, 128, 0.25);
+    }
   }
   div {
     padding: 15px 15px;
@@ -360,10 +378,78 @@ aside {
       height: 15px;
       width: 15px;
       opacity: 0.75;
+      transition-duration: 0.2s;
+      &:hover {
+        opacity: 0.63;
+      }
+      &:active {
+        opacity: 0.53;
+      }
     }
     p{
       font-size: 13px;
       font-weight: 500;
     }
+  }
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.history-image-container {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.history-image {
+  width: 100%;
+  height: auto;
+}
+
+.right-box {
+  padding: 0 15px;
+  h2 {
+    line-height: 44px;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.75;
+    user-select: none;
+  }
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.75;
+    user-select: none;
+  }
+  ul {
+    height: calc(100% - 44px);
+    overflow: scroll;
+  }
+  li {
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    &:hover {
+      background-color: #e0e0e00a;
+      .del-artist {
+        opacity: 0.5;
+      }
+    }
+  }
+  .del-artist {
+    position: absolute;
+    right: 14px;
+    opacity: 0;
+    transition-duration: 0.2s;
   }
 }
